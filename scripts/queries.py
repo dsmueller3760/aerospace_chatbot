@@ -11,7 +11,9 @@ from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 from langchain.chains.llm import LLMChain
-from langchain import PromptTemplate
+
+import os
+import pinecone
 
 from prompts import CONDENSE_QUESTION_PROMPT, QA_PROMPT, QA_WSOURCES_PROMPT
 
@@ -116,6 +118,7 @@ class QA_Model:
 
         # Implement filter
         if filter_arg:
+            print(self.sources)
             filter_list = list(set(item["source"] for item in self.sources[-1]))
             filter_items=[]
             for item in filter_list:
